@@ -18,7 +18,7 @@ const Hero = () => {
                 <img
                   src={letter.img}
                   alt={`Hover image ${index + 1}`}
-                  className="xl:h-36 h-24 absolute bottom-full -translate-x-1/2"
+                  className={`xl:h-36 h-24 absolute bottom-full -translate-x-1/2 ${letter.rotate}`}
                 />
               </span>
             ))}

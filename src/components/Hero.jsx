@@ -11,6 +11,7 @@ const Hero = () => {
   
   // State for tracking the current index in the professionTexts array
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isRotating, setIsRotating] = useState(false)
 
   useEffect(() => {
     // Animation timing configuration
@@ -19,11 +20,13 @@ const Hero = () => {
 
     // Set up the text rotation interval
     const interval = setInterval(() => {
+      setIsRotating(true)
       setTimeout(() => {
         // Calculate next index with wrap-around
         const nextIndex = (currentIndex + 1) % professionTexts.length;
         setCurrentIndex(nextIndex);
         setCurrentText(professionTexts[nextIndex]);
+        setIsRotating(false)
       }, textChangeDelay);
     }, rotationInterval);
 
@@ -79,9 +82,13 @@ const Hero = () => {
           </span>
 
           {/* Profession Text Display with Rotating Text */}
-          <span className="xl:text-6xl md:text-4xl text-2xl tracking-wider xl:py-4 py-2">
+          <span className="xl:text-6xl md:text-4xl text-2xl tracking-wider xl:py-4 py-2 overflow-hidden">
             I'm{" "}
-            <span className="inline-block xl:w-[380px] md:w-[240px] w-[160px] lg:ml-6 ml-2 font-extrabold text-yellow-500">
+            <span
+              className={`inline-block xl:w-[380px] md:w-[240px] w-[160px] lg:ml-6 ml-2 font-extrabold transform origin-left transition-transform duration-300 ease-out text-yellow-500 ${
+                isRotating ? "rotate-[100deg]" : "rotate-0"
+              }`}
+            >
               {currentText}
             </span>{" "}
             Web Developer
